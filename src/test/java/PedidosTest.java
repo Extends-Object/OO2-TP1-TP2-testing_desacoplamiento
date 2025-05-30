@@ -32,9 +32,9 @@ public class PedidosTest {
 
         Tarjeta tarjeta = new TarjetaVisa();        //El descuento con Visa da 53.403
 
-        //Total con el descuento da 8847.097
-        //modelo.Propina es de 442.35485
-        //Total mas la propina da 9289.45185
+        //Total con el descuento da 8847.085
+        //modelo.Propina es de 442.354
+        //Total mas la propina da 9289.439
 
         //Exercise
         try {
@@ -54,9 +54,9 @@ public class PedidosTest {
 
         Tarjeta tarjeta = new TarjetaMastercard();        //El descuento con Master da 142.408
 
-        //Total con el descuento da 8758.092
-        //modelo.Propina es de 262.74276
-        //Total con descuento mas la propina da 9020.835
+        //Total con el descuento da 8758.1
+        //modelo.Propina es de 262.743
+        //Total con descuento mas la propina da 9020.843
 
         //Exercise
         try {
