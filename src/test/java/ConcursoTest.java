@@ -12,7 +12,6 @@ public class ConcursoTest {
     private RepositorioConcursoFake repositorio;
     private NotificadorFake notificador;
     private RelojFake reloj;
-
     private Concurso concurso;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
@@ -60,7 +59,7 @@ public class ConcursoTest {
         String resultado = concurso.inscribirParticipante(participante);
 
         assertEquals("Se realizó la inscripción.", resultado, "No se pudo realizar la inscripción.");
-        assertEquals(0, participante.getPuntosAcumulados(), "Los puntos se han asignado correctamente.");
+        assertEquals(0, participante.getPuntosAcumulados(), "Los puntos no se han asignado correctamente.");
         assertTrue(repositorio.inscriptos.contains(participante), "El participante no se encuentra en la lista de inscriptos.");
         assertTrue(notificador.notificados.contains("isabel@mail.com"), "No se pudo notificar.");
     }
