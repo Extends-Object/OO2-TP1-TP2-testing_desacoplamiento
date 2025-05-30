@@ -40,6 +40,19 @@ public class ConcursoTest {
     }
 
     @Test
+    public void inscribirAntesDeFechaInicioTest() throws Exception {
+        reloj.setFechaActual(fechaInicio.minusDays(1)); //fecha antes
+
+        Participante participante = new Participante("Lola", "lola@mail.com");
+
+        String resultado = concurso.inscribirParticipante(participante);
+
+        assertEquals("No se puede inscribir: la inscripción está cerrada.", resultado);
+        assertFalse(repositorio.inscriptos.contains(participante), "El participante no debería estar inscripto.");
+        assertFalse(notificador.notificados.contains("lola@mail.com"), "No debería haberse notificado.");
+    }
+
+    @Test
     public void inscribirFueraDeFechaTest() throws Exception {
         reloj.setFechaActual(fechaFin.plusDays(1));
         Participante participante = new Participante("Dominga", "dominga@mail.com");
@@ -63,5 +76,29 @@ public class ConcursoTest {
         assertTrue(repositorio.inscriptos.contains(participante), "El participante no se encuentra en la lista de inscriptos.");
         assertTrue(notificador.notificados.contains("isabel@mail.com"), "No se pudo notificar.");
     }
+
+    @Test
+    public void emailInvalidoTest() {
+        assertThrows(RuntimeException.class, () -> new Participante("Pepita", "un email no valido"));
+    }
+
+    @Test
+    public void nombreParticipanteVacioTest() {
+        assertThrows(RuntimeException.class, () -> new Participante(" ", "pepita@mail.com"));
+    }
+
+    @Test
+    public void fechasConcursoInvalidasTest() {
+
+        LocalDate inicio = LocalDate.of(2025, 5, 31);
+        LocalDate fin = LocalDate.of(2025, 5, 1);
+        //no deberia ser la fecha fin antes del inicio
+
+        assertThrows(RuntimeException.class, () ->
+                new Concurso("Concurso A", inicio, fin, repositorio, notificador, reloj)
+        );
+    }
+
+
 
 }
